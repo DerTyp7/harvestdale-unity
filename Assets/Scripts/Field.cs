@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
+
 public class Field : MonoBehaviour
 {
   public Crop crop;
@@ -7,11 +9,10 @@ public class Field : MonoBehaviour
 
   private void Start()
   {
-    TimeManager.OnMinuteChanged += logTime;
-    TimeManager.OnHourChanged += logTime;
+    TimeManager.OnDayChanged += AddDay;
   }
-  public void logTime()
+  private void AddDay()
   {
-    Debug.Log($"{TimeManager.Hour:00}:{TimeManager.Minute:00}");
+    daysSincePlanted++;
   }
 }
