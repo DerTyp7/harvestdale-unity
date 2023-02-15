@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Field : MonoBehaviour
+public class Field : Building
 {
   public Crop crop;
   public int daysSincePlanted;
@@ -14,5 +14,10 @@ public class Field : MonoBehaviour
   private void AddDay()
   {
     daysSincePlanted++;
+  }
+
+  public override void OnPlace()
+  {
+
   }
 }

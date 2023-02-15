@@ -1,14 +1,16 @@
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public abstract class Building : MonoBehaviour
 {
   public bool isPlaced = false;
   public PlaceableObject placeableObject;
 
+  public abstract void OnPlace();
   public void Place()
   {
     isPlaced = true;
     BuildingManager.buildings.Add(this);
+    OnPlace();
   }
 
   public void Demolish()
@@ -20,6 +22,6 @@ public class Building : MonoBehaviour
 
   public Vector3Int GetGridPosition()
   {
-    return new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), 0);
+    return new Vector3Int(Mathf.FloorToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), 0);
   }
 }

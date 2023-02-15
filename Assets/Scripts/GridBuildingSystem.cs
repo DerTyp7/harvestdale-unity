@@ -17,12 +17,13 @@ public class GridBuildingSystem : MonoBehaviour
   private void Update()
   {
     Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    int snappedX = Mathf.RoundToInt(mousePosition.x);
-    int snappedY = Mathf.RoundToInt(mousePosition.y);
+    int snappedX = Mathf.FloorToInt(mousePosition.x);
+    int snappedY = Mathf.FloorToInt(mousePosition.y);
     Vector3Int snappedMousePosition = new Vector3Int(snappedX, snappedY, 0);
 
     if (Input.GetKeyDown(KeyCode.N))
     {
+      UnselectBuilding();
       isDemolishing = !isDemolishing;
       Debug.Log(isDemolishing);
     }
@@ -71,6 +72,7 @@ public class GridBuildingSystem : MonoBehaviour
     }
     else
     {
+      Cursor.visible = true;
       if (Input.GetMouseButtonDown(0))
       {
         Building demoBuilding = BuildingManager.GetBuildingByGridPosition(snappedMousePosition);
