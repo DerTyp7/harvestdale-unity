@@ -9,8 +9,8 @@ public class PlaceableObject : ScriptableObject
   public int width;
   public int height;
 
-  public void Place()
+  public Vector3Int GetSizeVector()
   {
-    Debug.Log("PLACE");
+    return new Vector3Int(width, height, 1);
   }
 }

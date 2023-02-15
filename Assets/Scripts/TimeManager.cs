@@ -39,10 +39,10 @@ public class TimeManager : MonoBehaviour
         {
           Day++;
           Hour = 0;
-          OnDayChanged();
+          OnDayChanged?.Invoke();
         }
 
-        OnHourChanged();
+        OnHourChanged?.Invoke();
       }
 
       timer = minuteToRealTime;
