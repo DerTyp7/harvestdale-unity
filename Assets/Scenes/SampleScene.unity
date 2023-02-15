@@ -237,7 +237,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224768186}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.5101213, y: 0.036043525, z: 0}
+  m_LocalPosition: {x: -7.45, y: 4.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29650,12 +29650,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1507699183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e90c7a6153f1b345a7aa678ca6b61cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c4997c1e7757ea49a7ea73e46e528c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridLayout: {fileID: 1507699184}
-  mainTilemap: {fileID: 1579890810}
-  takenTile: {fileID: 11400000, guid: 4815673d17e2b7246b5812e51b47cd6d, type: 2}
+  placeableObject: {fileID: 11400000, guid: 40437410555fcda43ab2ec4c9a4c2807, type: 2}
+  collisionTm: {fileID: 1579890810}
 --- !u!1 &1579890809
 GameObject:
   m_ObjectHideFlags: 0
@@ -29668,7 +29667,7 @@ GameObject:
   - component: {fileID: 1579890810}
   - component: {fileID: 1579890811}
   m_Layer: 0
-  m_Name: Buildings
+  m_Name: Occupied
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30166,7 +30165,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 99
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -30248,11 +30247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5852600358559839619, guid: 5eebe6599cdf53b4da6f656f81588cb8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5852600358559839619, guid: 5eebe6599cdf53b4da6f656f81588cb8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5852600358559839619, guid: 5eebe6599cdf53b4da6f656f81588cb8, type: 3}
       propertyPath: m_LocalPosition.z
