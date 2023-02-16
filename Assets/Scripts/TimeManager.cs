@@ -12,7 +12,7 @@ public class TimeManager : MonoBehaviour
   public static int Hour { get; private set; }
   public static int Day { get; private set; }
 
-  private float minuteToRealTime = .5f;
+  public float minuteToRealTime = .2f;
   private float timer;
 
   private void Start()
