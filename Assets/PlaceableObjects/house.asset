@@ -15,4 +15,4 @@ MonoBehaviour:
   objectName: house
   prefab: {fileID: 6244317213382018835, guid: 5eebe6599cdf53b4da6f656f81588cb8, type: 3}
   width: 4
-  height: 5
+  height: 2

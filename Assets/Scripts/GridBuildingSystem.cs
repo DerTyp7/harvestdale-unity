@@ -7,7 +7,9 @@ public class GridBuildingSystem : MonoBehaviour
 {
 
   public PlaceableObject TESTPO; //! DEBUG
+
   public Tilemap collisionTm;
+  public Tilemap occupiedTm;
   public TileBase occupiedTile;
 
   private PlaceableObject placeableObject;
@@ -117,7 +119,7 @@ public class GridBuildingSystem : MonoBehaviour
       tileArray[index] = occupiedTile;
     }
 
-    collisionTm.SetTilesBlock(area, tileArray);
+    occupiedTm.SetTilesBlock(area, tileArray);
 
   }
 
@@ -130,16 +132,14 @@ public class GridBuildingSystem : MonoBehaviour
       tileArray[index] = null;
     }
 
-    collisionTm.SetTilesBlock(area, tileArray);
+    occupiedTm.SetTilesBlock(area, tileArray);
   }
 
   private bool IsOccupied(Vector3Int startPos, Vector3Int poSize)
   {
-
-
     BoundsInt area = new BoundsInt(startPos, poSize);
-    TileBase[] tileArray = collisionTm.GetTilesBlock(area);
-
+    List<TileBase> tileArray = new List<TileBase>(occupiedTm.GetTilesBlock(area));
+    tileArray.AddRange(collisionTm.GetTilesBlock(area));
     foreach (TileBase tile in tileArray)
     {
       if (tile != null)
