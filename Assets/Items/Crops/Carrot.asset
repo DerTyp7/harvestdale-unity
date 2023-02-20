@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e283aa008f05f1e46b99a7987202ec09, type: 3}
   m_Name: Carrot
   m_EditorClassIdentifier: 
-  cropName: Carrot
+  uuid: 
+  itemName: Carrot
+  quantity: 1
   daysToGrow: 6
   sprites:
   - {fileID: -1568493089, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}

@@ -202,9 +202,11 @@ GameObject:
   - component: {fileID: 224768190}
   - component: {fileID: 224768189}
   - component: {fileID: 224768188}
+  - component: {fileID: 224768193}
   - component: {fileID: 224768187}
   - component: {fileID: 224768191}
   - component: {fileID: 224768192}
+  - component: {fileID: 224768194}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -350,6 +352,34 @@ CapsuleCollider2D:
   m_Offset: {x: 0.005384445, y: -0.8123081}
   m_Size: {x: 0.3146143, y: 0.3146143}
   m_Direction: 0
+--- !u!114 &224768193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224768186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50a6d9f6c7ba0e49a308d097eb64fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSlots: 20
+  items: []
+--- !u!114 &224768194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224768186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd29210254821be4dab438ab0312df18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testItem1: {fileID: 11400000, guid: 601d7a33a6c338d49a35134d5c772940, type: 2}
+  testItem2: {fileID: 11400000, guid: cbbbe8384f7ec2845b4145744d51ecf8, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

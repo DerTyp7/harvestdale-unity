@@ -8,5 +8,15 @@ public class Item : ScriptableObject
   public string uuid;
   public string itemName;
 
-  public int quantity = 1;
+  public bool stackable = true;
+  public int maxStackSize = 100;
+
+
+  private void OnEnable()
+  {
+    if (!stackable)
+    {
+      maxStackSize = 1;
+    }
+  }
 }
