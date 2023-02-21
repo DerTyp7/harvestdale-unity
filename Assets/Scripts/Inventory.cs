@@ -1,7 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 public class Inventory : MonoBehaviour
 {
+  public static Action OnPlayerInventoryChanged;
+
+  public bool isPlayerInventory = false;
   public int maxSlots = 20; // maximum number of slots in the inventory
   public List<InventoryItem> items = new List<InventoryItem>(); // list of items in the inventory
 
@@ -27,6 +31,11 @@ public class Inventory : MonoBehaviour
           // exit the loop if all items have been added
           if (remainingCount == 0)
           {
+            if (isPlayerInventory)
+            {
+              OnPlayerInventoryChanged?.Invoke();
+            }
+
             return 0;
           }
         }
@@ -42,6 +51,10 @@ public class Inventory : MonoBehaviour
     }
 
     // return the quantity of items which could not be added
+    if (isPlayerInventory)
+    {
+      OnPlayerInventoryChanged?.Invoke();
+    }
     return remainingCount;
   }
 
@@ -71,12 +84,20 @@ public class Inventory : MonoBehaviour
         // exit the loop if all items have been removed
         if (remainingCount == 0)
         {
+          if (isPlayerInventory)
+          {
+            OnPlayerInventoryChanged?.Invoke();
+          }
           return 0;
         }
       }
     }
 
     // return the quantity of items which could not be removed
+    if (isPlayerInventory)
+    {
+      OnPlayerInventoryChanged?.Invoke();
+    }
     return remainingCount;
   }
 }

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uuid: apple
   itemName: Apple
+  sprite: {fileID: -992969038, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}
   stackable: 1
   maxStackSize: 100

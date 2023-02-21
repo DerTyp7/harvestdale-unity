@@ -7,42 +7,60 @@ public class PlayerController : MonoBehaviour
 
   public Item testItem1;
   public Item testItem2;
+
+  [SerializeField] private int hotbarSlotCount = 9;
+  [SerializeField] private int activeHotbarSlot = 0;
+  [SerializeField] private Inventory playerInventory;
+
   // Start is called before the first frame update
   void Start()
   {
-
+    playerInventory = GetComponent<Inventory>();
   }
 
   // Update is called once per frame
   void Update()
   {
-    Inventory inventory = GetComponent<Inventory>();
+    float scroll = Input.GetAxis("Mouse ScrollWheel");
+    if (scroll != 0)
+    {
+      activeHotbarSlot += (int)Mathf.Sign(scroll);
+      if (activeHotbarSlot < 0)
+      {
+        activeHotbarSlot = hotbarSlotCount - 1;
+      }
+      else if (activeHotbarSlot >= hotbarSlotCount)
+      {
+        activeHotbarSlot = 0;
+      }
+    }
 
+    //! DEBUG
     if (Input.GetKeyDown(KeyCode.U))
     {
       // add 5 apples
-      int remainingCount = inventory.Add(testItem1, 5);
-      Debug.Log("Added " + (5 - remainingCount) + " apples to inventory.");
+      int remainingCount = playerInventory.Add(testItem1, 5);
+      Debug.Log("Added " + (5 - remainingCount) + " apples to playerInventory.");
     }
 
     if (Input.GetKeyDown(KeyCode.I))
     { // add 15 more apples
-      int remainingCount = inventory.Add(testItem1, 15);
-      Debug.Log("Added " + (15 - remainingCount) + " apples to inventory.");
+      int remainingCount = playerInventory.Add(testItem1, 15);
+      Debug.Log("Added " + (15 - remainingCount) + " apples to playerInventory.");
     }
 
     if (Input.GetKeyDown(KeyCode.O))
     {
       // add 10 bananas
-      int remainingCount = inventory.Add(testItem2, 10);
-      Debug.Log("Added " + (10 - remainingCount) + " bananas to inventory.");
+      int remainingCount = playerInventory.Add(testItem2, 10);
+      Debug.Log("Added " + (10 - remainingCount) + " bananas to playerInventory.");
     }
 
 
     if (Input.GetKeyDown(KeyCode.J))
     {
       int count = 3;
-      int applesRemaining = inventory.Remove(testItem1, count);
+      int applesRemaining = playerInventory.Remove(testItem1, count);
       Debug.Log("Removed " + (count - applesRemaining) + " apples.");
 
     }
@@ -50,7 +68,7 @@ public class PlayerController : MonoBehaviour
     if (Input.GetKeyDown(KeyCode.K))
     {
       int count = 5;
-      int bananasRemaining = inventory.Remove(testItem2, count);
+      int bananasRemaining = playerInventory.Remove(testItem2, count);
       Debug.Log("Removed " + (count - bananasRemaining) + " bananas.");
 
     }

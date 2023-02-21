@@ -8,6 +8,7 @@ public class Item : ScriptableObject
   public string uuid;
   public string itemName;
 
+  public Sprite sprite;
   public bool stackable = true;
   public int maxStackSize = 100;
 
