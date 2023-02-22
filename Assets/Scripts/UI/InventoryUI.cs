@@ -32,14 +32,10 @@ public class InventoryUI : MonoBehaviour
   }
   private void UpdateSlots()
   {
-    Debug.Log("Update slots");
     int i = 0;
     foreach (SlotUI slotUi in slotUIList)
     {
-
       slotUi.SetInventoryItem(playerInventory.items[i]);
-
-
       i++;
     }
   }

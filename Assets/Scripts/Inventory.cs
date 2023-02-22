@@ -60,7 +60,7 @@ public class Inventory : MonoBehaviour
     {
       InventoryItem invItem = items[i];
       Debug.Log(invItem);
-      if (invItem.item == null)
+      if (invItem?.item == null)
       {
 
         int toAdd = Mathf.Min(item.maxStackSize, remainingCount);

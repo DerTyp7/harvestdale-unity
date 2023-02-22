@@ -15,7 +15,6 @@ public class SlotUI : MonoBehaviour, IDropHandler
   private void Start()
   {
     UpdateSlot();
-    contentObject.GetComponent<DraggableSlotContentUI>().slotIndex = slotIndex;
     playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
   }
   public void SetInventoryItem(InventoryItem newInventoryItem)
