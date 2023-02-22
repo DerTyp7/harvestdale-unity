@@ -35,6 +35,11 @@ public class PlayerController : MonoBehaviour
       }
     }
 
+    if (Input.GetKeyDown(KeyCode.Tab))
+    {
+      GuiManager.Instance.TogglePanel("Inventory");
+    }
+
     //! DEBUG
     if (Input.GetKeyDown(KeyCode.U))
     {

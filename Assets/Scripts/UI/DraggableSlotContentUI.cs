@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
-
 public class DraggableSlotContentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
   public int slotIndex; // slotIndex is set by SlotUI

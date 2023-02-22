@@ -56726,6 +56726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9269c8c372de3f5498d2af345ee9c855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelName: Inventory
   slotPrefab: {fileID: 9079120991637034566, guid: 9fb7f575f90d73343b4841c421d17567, type: 3}
   slotListObj: {fileID: 1707136373}
   slotUIList: []
@@ -57525,8 +57526,9 @@ GameObject:
   - component: {fileID: 2143575112}
   - component: {fileID: 2143575111}
   - component: {fileID: 2143575110}
+  - component: {fileID: 2143575114}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57615,3 +57617,15 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2143575114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143575109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ccedadcedce99843833ee718fc06377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
