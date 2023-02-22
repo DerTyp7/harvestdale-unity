@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class SlotUI : MonoBehaviour
+using UnityEngine.EventSystems;
+public class SlotUI : MonoBehaviour, IDropHandler
 {
+  public int slotIndex;
+  [SerializeField] private GameObject contentObject;
   [SerializeField] private InventoryItem inventoryItem;
   [SerializeField] private Image itemSpriteImage;
   [SerializeField] private TMPro.TextMeshProUGUI quantityText;
 
+  private Inventory playerInventory;
   private void Start()
   {
     UpdateSlot();
+    contentObject.GetComponent<DraggableSlotContentUI>().slotIndex = slotIndex;
+    playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
   }
   public void SetInventoryItem(InventoryItem newInventoryItem)
   {
@@ -24,10 +29,13 @@ public class SlotUI : MonoBehaviour
     if (inventoryItem != null)
     {
       itemSpriteImage.sprite = inventoryItem?.item?.sprite ?? null;
-      Debug.Log(itemSpriteImage.sprite);
       if (itemSpriteImage.sprite == null)
       {
         itemSpriteImage.color = new Color(0, 0, 0, 0);
+      }
+      else
+      {
+        itemSpriteImage.color = new Color(255, 255, 255, 1);
       }
 
       quantityText.SetText(inventoryItem.count != 0 ? inventoryItem.count.ToString() : "");
@@ -39,6 +47,15 @@ public class SlotUI : MonoBehaviour
       itemSpriteImage.color = new Color(0, 0, 0, 0);
     }
 
+  }
+
+
+
+  public void OnDrop(PointerEventData eventData)
+  {
+    Debug.Log("DROP");
+    DraggableSlotContentUI dropped = eventData.pointerDrag.GetComponent<DraggableSlotContentUI>();
+    playerInventory.SwapItems(dropped.slotIndex, slotIndex);
   }
 
 }

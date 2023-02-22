@@ -25,7 +25,9 @@ public class InventoryUI : MonoBehaviour
 
     for (int i = 0; i < playerInventory.maxSlots; i++)
     {
-      slotUIList.Add(Instantiate(slotPrefab, Vector3.zero, Quaternion.identity, slotListObj.transform).GetComponent<SlotUI>());
+      SlotUI newSlot = Instantiate(slotPrefab, Vector3.zero, Quaternion.identity, slotListObj.transform).GetComponent<SlotUI>();
+      newSlot.slotIndex = i;
+      slotUIList.Add(newSlot);
     }
   }
   private void UpdateSlots()
@@ -34,14 +36,9 @@ public class InventoryUI : MonoBehaviour
     int i = 0;
     foreach (SlotUI slotUi in slotUIList)
     {
-      if (i < playerInventory.items.Count)
-      {
-        slotUi.SetInventoryItem(playerInventory.items[i]);
-      }
-      else
-      {
-        slotUi.SetInventoryItem(null);
-      }
+
+      slotUi.SetInventoryItem(playerInventory.items[i]);
+
 
       i++;
     }

@@ -7,7 +7,17 @@ public class Inventory : MonoBehaviour
 
   public bool isPlayerInventory = false;
   public int maxSlots = 20; // maximum number of slots in the inventory
-  public List<InventoryItem> items = new List<InventoryItem>(); // list of items in the inventory
+  public InventoryItem[] items; // list of items in the inventory
+
+
+  private void Awake()
+  {
+    items = new InventoryItem[maxSlots];
+    for (int i = 0; i < maxSlots; i++)
+    {
+      items[i] = null;
+    }
+  }
 
   // adds an item to the inventory, returns the quantity of items which could not be added
   public int Add(Item item, int count)
@@ -17,10 +27,12 @@ public class Inventory : MonoBehaviour
     // check if the item is stackable
     if (item.stackable)
     {
+
       // look for an existing stack of the same item in the inventory
-      foreach (InventoryItem invItem in items)
+      for (int i = 0; i < items.Length; i++)
       {
-        if (invItem.item == item && invItem.count < item.maxStackSize)
+        InventoryItem invItem = items[i];
+        if (invItem != null && invItem.item == item && invItem.count < item.maxStackSize)
         {
           // add as many items as possible to the stack
           int space = item.maxStackSize - invItem.count;
@@ -43,11 +55,30 @@ public class Inventory : MonoBehaviour
     }
 
     // if there is still remaining count, add new stacks of the item
-    while (remainingCount > 0 && items.Count < maxSlots)
+    for (int i = 0; i < items.Length; i++)
+
     {
-      int toAdd = Mathf.Min(item.maxStackSize, remainingCount);
-      items.Add(new InventoryItem(item, toAdd));
-      remainingCount -= toAdd;
+      InventoryItem invItem = items[i];
+      Debug.Log(invItem);
+      if (invItem.item == null)
+      {
+
+        int toAdd = Mathf.Min(item.maxStackSize, remainingCount);
+        items[i] = new InventoryItem(item, toAdd);
+        remainingCount -= toAdd;
+
+        // exit the loop if all items have been added
+        if (remainingCount == 0)
+        {
+
+          if (isPlayerInventory)
+          {
+            OnPlayerInventoryChanged?.Invoke();
+          }
+
+          return 0;
+        }
+      }
     }
 
     // return the quantity of items which could not be added
@@ -55,6 +86,7 @@ public class Inventory : MonoBehaviour
     {
       OnPlayerInventoryChanged?.Invoke();
     }
+
     return remainingCount;
   }
 
@@ -65,10 +97,10 @@ public class Inventory : MonoBehaviour
     int remainingCount = count;
 
     // look for an existing stack of the item in the inventory
-    for (int i = 0; i < items.Count; i++)
+    for (int i = 0; i < items.Length; i++)
     {
       InventoryItem invItem = items[i];
-      if (invItem.item == item)
+      if (invItem != null && invItem.item == item)
       {
         // remove as many items as possible from the stack
         int toRemove = Mathf.Min(invItem.count, remainingCount);
@@ -78,7 +110,7 @@ public class Inventory : MonoBehaviour
         // remove the stack if it's now empty
         if (invItem.count == 0)
         {
-          items.RemoveAt(i);
+          items[i] = null;
         }
 
         // exit the loop if all items have been removed
@@ -99,6 +131,17 @@ public class Inventory : MonoBehaviour
       OnPlayerInventoryChanged?.Invoke();
     }
     return remainingCount;
+  }
+
+  public void SwapItems(int index1, int index2)
+  {
+    InventoryItem temp = items[index1];
+    items[index1] = items[index2];
+    items[index2] = temp;
+    if (isPlayerInventory)
+    {
+      OnPlayerInventoryChanged?.Invoke();
+    }
   }
 }
 
