@@ -12,12 +12,15 @@ public class InventoryUI : GuiPanel
 
   private void Start()
   {
-    playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
     Inventory.OnPlayerInventoryChanged += UpdateSlots;
-    CreateSlots();
   }
   public override void OnOpen()
   {
+    if (slotUIList.Count == 0)
+    {
+      playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+      CreateSlots();
+    }
     UpdateSlots();
   }
 

@@ -1,21 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
 
+  public static Action OnActiveSlotChanged;
   public Item testItem1;
   public Item testItem2;
 
-  [SerializeField] private int hotbarSlotCount = 9;
-  [SerializeField] private int activeHotbarSlot = 0;
+  public int hotbarSlotCount = 9;
+  public int activeHotbarSlot = 0;
   [SerializeField] private Inventory playerInventory;
 
   // Start is called before the first frame update
   void Start()
   {
     playerInventory = GetComponent<Inventory>();
+    GuiManager.Instance.OpenPanel("Hotbar");
   }
 
   // Update is called once per frame
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
       {
         activeHotbarSlot = 0;
       }
+      OnActiveSlotChanged?.Invoke();
     }
 
     if (Input.GetKeyDown(KeyCode.Tab))

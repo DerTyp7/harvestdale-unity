@@ -28,14 +28,13 @@ public class GuiManager : MonoBehaviour
 
   private void Awake()
   {
-    if (instance == null)
+    if (instance != null && instance != this)
     {
-      instance = this;
+      Destroy(this.gameObject);
+      return;
     }
-    else
-    {
-      Destroy(gameObject);
-    }
+    instance = this;
+    DontDestroyOnLoad(gameObject);
   }
 
 
@@ -65,6 +64,10 @@ public class GuiManager : MonoBehaviour
     {
       OpenPanel(panel);
     }
+    else
+    {
+      Debug.Log("Panel not found: " + name);
+    }
   }
 
   public void OpenPanel(GuiPanel panel)
@@ -73,7 +76,7 @@ public class GuiManager : MonoBehaviour
     if (!panel.gameObject.activeSelf)
     {
       panel.gameObject.SetActive(true);
-      panel.OnClose();
+      panel.OnOpen();
       Debug.Log("Open Panel");
       return;
     }
