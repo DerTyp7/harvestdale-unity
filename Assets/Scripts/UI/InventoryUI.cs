@@ -22,11 +22,12 @@ public class InventoryUI : GuiPanel
       CreateSlots();
     }
     UpdateSlots();
+    GuiManager.Instance.ClosePanel("Hotbar");
   }
 
   public override void OnClose()
   {
-
+    GuiManager.Instance.OpenPanel("Hotbar");
   }
   private void CreateSlots()
   {
