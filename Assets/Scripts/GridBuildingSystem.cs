@@ -6,6 +6,23 @@ using UnityEngine.Tilemaps;
 public class GridBuildingSystem : MonoBehaviour
 {
 
+  private static GridBuildingSystem instance;
+
+  public static GridBuildingSystem Instance
+  {
+    get
+    {
+      if (instance == null)
+      {
+        instance = FindObjectOfType<GridBuildingSystem>();
+        if (instance == null)
+        {
+          Debug.LogError("No GridBuildingSystem found in the scene.");
+        }
+      }
+      return instance;
+    }
+  }
   public PlaceableObject TESTPO; //! DEBUG
 
   public Tilemap collisionTm;
@@ -16,12 +33,20 @@ public class GridBuildingSystem : MonoBehaviour
   private GameObject newBuildingObject;
   private bool isDemolishing = false;
 
+  private void Awake()
+  {
+    if (instance != null && instance != this)
+    {
+      Destroy(this.gameObject);
+      return;
+    }
+    instance = this;
+    DontDestroyOnLoad(gameObject);
+  }
+
   private void Update()
   {
-    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    int snappedX = Mathf.FloorToInt(mousePosition.x);
-    int snappedY = Mathf.FloorToInt(mousePosition.y);
-    Vector3Int snappedMousePosition = new Vector3Int(snappedX, snappedY, 0);
+    Vector3Int snappedMousePosition = GetSnappedMousePosition();
 
     if (Input.GetKeyDown(KeyCode.N))
     {
@@ -87,6 +112,17 @@ public class GridBuildingSystem : MonoBehaviour
       }
     }
 
+  }
+  public Vector3Int GetSnappedMousePosition()
+  {
+    return GetSnappedPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+  }
+
+  public Vector3Int GetSnappedPosition(Vector3 pos)
+  {
+    int snappedX = Mathf.FloorToInt(pos.x);
+    int snappedY = Mathf.FloorToInt(pos.y);
+    return new Vector3Int(snappedX, snappedY, 0);
   }
 
   public void SelectBuilding(PlaceableObject newPo)

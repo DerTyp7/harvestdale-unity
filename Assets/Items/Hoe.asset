@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab99e668aa1ba5a469eef680f3bb4b45, type: 3}
   m_Name: Hoe
   m_EditorClassIdentifier: 
-  uuid: 
+  uuid: Dia Hoe
   itemName: 
   sprite: {fileID: 0}
-  stackable: 1
-  maxStackSize: 100
+  stackable: 0
+  maxStackSize: 1

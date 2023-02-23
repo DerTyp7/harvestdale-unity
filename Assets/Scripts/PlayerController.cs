@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
   public static Action OnActiveSlotChanged;
   public Item testItem1;
   public Item testItem2;
-
+  public float interactionDistance = 2.5f;
   public int hotbarSlotCount = 9;
   public int activeHotbarSlot = 0;
   [SerializeField] private Inventory playerInventory;
@@ -42,6 +42,26 @@ public class PlayerController : MonoBehaviour
     if (Input.GetKeyDown(KeyCode.Tab))
     {
       GuiManager.Instance.TogglePanel("Inventory");
+    }
+
+    if (Input.GetMouseButtonDown(0))
+    {
+      Vector3Int snappedMousePosition = GridBuildingSystem.Instance.GetSnappedMousePosition();
+      Vector3Int snappedPlayerPosition = GridBuildingSystem.Instance.GetSnappedPosition(gameObject.transform.position);
+      if (Vector3Int.Distance(snappedMousePosition, snappedPlayerPosition) <= interactionDistance)
+      {
+        if (playerInventory.items[activeHotbarSlot]?.item is Tool)
+        {
+          Tool tool = playerInventory.items[activeHotbarSlot].item as Tool;
+          tool.Use();
+        }
+      }
+      else
+      {
+        Debug.Log("Not in range");
+
+      }
+
     }
 
     //! DEBUG

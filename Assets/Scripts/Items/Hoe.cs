@@ -5,11 +5,13 @@ public class Hoe : Tool
 {
   public override void OnUse()
   {
-    throw new System.NotImplementedException();
+    Debug.Log("Hoe on use");
+
   }
 
   public override void Use()
   {
+    Debug.Log("Hoe use");
     OnUse();
   }
 }
