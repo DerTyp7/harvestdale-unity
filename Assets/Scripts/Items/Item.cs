@@ -9,6 +9,8 @@ public class Item : ScriptableObject
   public string itemName;
 
   public Sprite sprite;
+
+  [Tooltip("Tools will set this to false on Awake()")]
   public bool stackable = true;
   public int maxStackSize = 100;
 
