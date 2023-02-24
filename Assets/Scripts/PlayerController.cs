@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour
       else
       {
         Debug.Log("Not in range");
-
       }
 
     }
