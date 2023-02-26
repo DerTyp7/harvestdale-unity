@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a784de2d881964e8ee1583a44b5720, type: 3}
+  m_Script: {fileID: 11500000, guid: 00ac127aa1678874aa5c9f1381b6b47a, type: 3}
   m_Name: Banana
   m_EditorClassIdentifier: 
   uuid: banana
   itemName: Banana
-  sprite: {fileID: -3481185, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}
-  stackable: 0
-  maxStackSize: 1
+  sprite: {fileID: 1603187126, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}
+  stackable: 1
+  maxStackSize: 100
