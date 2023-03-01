@@ -12,6 +12,6 @@ public class Clock : MonoBehaviour
   }
   private void GetTime()
   {
-    text.SetText($"{TimeManager.Day:00}D | {TimeManager.Hour:00}:{TimeManager.Minute:00}");
+    text.SetText($"{TimeManager.Hour:00}:{TimeManager.Minute:00}<br>{TimeManager.Day:00}.{TimeManager.Month:00}.{TimeManager.Year:00}");
   }
 }
