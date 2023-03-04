@@ -10,10 +10,9 @@ public enum FieldState
 
 public class Field : Building
 {
-  public Crop TESTCROP;
   public Crop crop;
 
-  public SpriteRenderer currentCropSprite;
+  public SpriteRenderer currentCropSpriteRenderer;
   public int daysSincePlanted;
   public bool isWatered = false;
   public FieldState state = FieldState.EMPTY;
@@ -22,9 +21,20 @@ public class Field : Building
   private void Start()
   {
     TimeManager.OnDayChanged += AddDay;
-    //! DEBUG
-    OnPlace();
+
   }
+
+  private void SetSprite(Sprite sprite)
+  {
+    if (currentCropSpriteRenderer)
+    {
+      currentCropSpriteRenderer.sprite = sprite;
+      currentCropSpriteRenderer.drawMode = SpriteDrawMode.Tiled;
+      currentCropSpriteRenderer.size = new Vector2(10, 10); // TODO: Make this dynamic
+    }
+  }
+
+
   private void AddDay()
   {
     if (crop && isPlaced && state != FieldState.DEAD)
@@ -34,7 +44,7 @@ public class Field : Building
       else
       {
         daysSincePlanted++;
-        currentCropSprite.sprite = crop.sprites[daysSincePlanted];
+        SetSprite(crop.sprites[daysSincePlanted]);
       }
 
     }
@@ -45,12 +55,12 @@ public class Field : Building
     daysSincePlanted = 0;
     state = FieldState.GROWING;
     crop = newCrop;
+    SetSprite(crop.sprites[0]);
+
   }
 
   public override void OnPlace()
   {
-    daysSincePlanted = 0;
-    state = FieldState.GROWING;
-    Plant(TESTCROP);
+    Plant(null);
   }
 }

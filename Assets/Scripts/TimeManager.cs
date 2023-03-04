@@ -40,7 +40,7 @@ public class TimeManager : MonoBehaviour
       // Increase minute
       Minute++;
       OnMinuteChanged?.Invoke();
-      if (Minute >= 60)
+      if (Minute >= 59)
       {
         // Increase hour
         Hour++;
