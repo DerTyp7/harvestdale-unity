@@ -1,7 +1,5 @@
 using UnityEngine;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 [CreateAssetMenu(fileName = "Item", menuName = "Harvestdale/Items/Item", order = 0)]
 public class Item : ScriptableObject
 {

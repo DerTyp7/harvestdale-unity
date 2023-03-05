@@ -1,3 +1,8 @@
+// Contains logic for the field
+// Checks if a plant is dead, growing or harvestable
+// Determines what sprite to show
+// Handles planting and harvesting
+
 using UnityEngine;
 
 public enum FieldState
@@ -10,57 +15,133 @@ public enum FieldState
 
 public class Field : Building
 {
-  public Crop crop;
+  [Header("Children Objects")]
+  [SerializeField]
+  private SpriteRenderer cropSpriteRenderer;
 
-  public SpriteRenderer currentCropSpriteRenderer;
-  public int daysSincePlanted;
-  public bool isWatered = false;
-  public FieldState state = FieldState.EMPTY;
+  [SerializeField]
+  private SpriteRenderer backgroundSpriteRenderer;
 
+  [SerializeField]
+  private GameObject fieldController;
+
+  [Header("Field Properties")]
+  [SerializeField]
+  private Crop crop;
+
+  private Vector2Int size;
+  private int daysSincePlanted;
+  private bool isWatered = false;
+
+  private FieldState state = FieldState.EMPTY;
+
+  public FieldState State
+  {
+    get { return state; }
+  }
+
+  public bool IsWatered
+  {
+    get { return isWatered; }
+  }
 
   private void Start()
   {
-    TimeManager.OnDayChanged += AddDay;
+    size = DeterminSize();
+    SetFieldControllerPosition();
+    fieldController.GetComponent<FieldController>().SetField(this);
 
+    TimeManager.OnDayChanged += DayInterval;
+  }
+
+  public override void OnPlace()
+  {
+    EmptyField();
+  }
+
+  private void SetFieldControllerPosition()
+  {
+    if (fieldController)
+    {
+      fieldController.transform.localPosition = new Vector3(size.x, size.y / 2, 0);
+    }
+  }
+
+  private Vector2Int DeterminSize()
+  {
+    return new Vector2Int(Mathf.FloorToInt(backgroundSpriteRenderer.size.x), Mathf.FloorToInt(backgroundSpriteRenderer.size.y));
   }
 
   private void SetSprite(Sprite sprite)
   {
-    if (currentCropSpriteRenderer)
+    if (cropSpriteRenderer)
     {
-      currentCropSpriteRenderer.sprite = sprite;
-      currentCropSpriteRenderer.drawMode = SpriteDrawMode.Tiled;
-      currentCropSpriteRenderer.size = new Vector2(10, 10); // TODO: Make this dynamic
+      cropSpriteRenderer.sprite = sprite;
+      cropSpriteRenderer.drawMode = SpriteDrawMode.Tiled;
+      cropSpriteRenderer.size = size;
     }
   }
 
-
-  private void AddDay()
+  private void DayInterval()
   {
-    if (crop && isPlaced && state != FieldState.DEAD)
+    if (state == FieldState.GROWING)
     {
       if (!isWatered)
         state = FieldState.DEAD;
       else
       {
         daysSincePlanted++;
+        if (daysSincePlanted >= crop.daysToGrow)
+        {
+          state = FieldState.HARVESTABLE;
+        }
         SetSprite(crop.sprites[daysSincePlanted]);
       }
-
     }
   }
 
+  #region Field controlling
   public void Plant(Crop newCrop)
   {
-    daysSincePlanted = 0;
-    state = FieldState.GROWING;
-    crop = newCrop;
-    SetSprite(crop.sprites[0]);
+    bool enoughItemsInInventory = FarmManager.Instance.CropInventory.RemoveExactAmount(newCrop, size.x * size.y);
+    if (enoughItemsInInventory)
+    {
+      daysSincePlanted = 0;
+      state = FieldState.GROWING;
+      crop = newCrop;
+      SetSprite(crop.sprites[0]);
+    }
+    else
+    {
+      Debug.Log("Not enough items in inventory");
+    }
 
   }
 
-  public override void OnPlace()
+  public void Harvest()
   {
-    Plant(null);
+    if (state == FieldState.HARVESTABLE)
+    {
+      FarmManager.Instance.HarvestInventory.Add(crop.harvest, size.x * size.y);
+      state = FieldState.EMPTY;
+      SetSprite(null);
+    }
   }
+
+  public void Water()
+  {
+    isWatered = true;
+  }
+
+  public void UnWater()
+  {
+    isWatered = false;
+  }
+
+  public void EmptyField()
+  {
+    state = FieldState.EMPTY;
+    SetSprite(null);
+  }
+  #endregion
 }

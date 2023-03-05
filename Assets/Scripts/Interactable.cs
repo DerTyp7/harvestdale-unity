@@ -7,8 +7,7 @@ public abstract class Interactable : MonoBehaviour
   [Range(0f, 10f)]
   private float radius = 2f; // radius of interaction
 
-  [SerializeField]
-  private string interactText = "Interact"; // text to display when player is in range
+  public abstract string interactText { get; } // text to display when player is in range
 
   [SerializeField]
   private string interactTextOutOfRange = "Out of range"; // text to display when player is out of range

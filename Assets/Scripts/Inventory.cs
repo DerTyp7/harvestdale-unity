@@ -11,6 +11,10 @@ public class Inventory<TItem> where TItem : Item
   [SerializeField]
   private InventoryItem<TItem>[] items;
 
+  public InventoryItem<TItem>[] Items
+  {
+    get { return items; }
+  }
   public Inventory(int maxSlots = 1, int maxStackSize = 100)
   {
     this.maxSlots = maxSlots;
@@ -89,7 +93,7 @@ public class Inventory<TItem> where TItem : Item
 
 
   // removes an item from the inventory, returns the quantity of items which could not be removed
-  public int Remove(Item item, int count)
+  public int Remove(TItem item, int count)
   {
     int remainingCount = count;
 
@@ -113,15 +117,46 @@ public class Inventory<TItem> where TItem : Item
         // exit the loop if all items have been removed
         if (remainingCount == 0)
         {
-
           return 0;
         }
       }
     }
 
     // return the quantity of items which could not be removed
-
     return remainingCount;
+  }
+
+  public int GetCountOfItem(TItem item)
+  {
+    int count = 0;
+
+    // look for an existing stack of the item in the inventory
+    for (int i = 0; i < items.Length; i++)
+    {
+      InventoryItem<TItem> invItem = items[i];
+      if (invItem != null && invItem.item == item)
+      {
+        count += invItem.count;
+      }
+    }
+
+    return count;
+  }
+
+
+  // Remove the exact amount of items from the inventory
+  // If the amount of items in the inventory is less than the amount to remove, it will remove nothing and return false
+  public bool RemoveExactAmount(TItem item, int count)
+  {
+    if (GetCountOfItem(item) < count)
+    {
+      return false;
+    }
+    else
+    {
+      Remove(item, count);
+      return true;
+    }
   }
 
   public void SwapItems(int index1, int index2)

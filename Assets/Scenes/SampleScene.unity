@@ -150,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122753038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.95, y: 5.15, z: 0}
+  m_LocalPosition: {x: 1.71, y: 4.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -222,10 +222,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 3
-  interactText: Interact
   interactTextOutOfRange: Out of range
-  field: {fileID: 0}
-  crop: {fileID: 0}
+  field: {fileID: 1047402457}
+  testCrop: {fileID: 11400000, guid: 4ce577b0996dc314ab1b42f42614e3a2, type: 2}
 --- !u!61 &122753042
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -554,7 +553,7 @@ SpriteRenderer:
   m_SortingLayerID: 949894591
   m_SortingLayer: -1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 109301499, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -562,7 +561,7 @@ SpriteRenderer:
   m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &518922043
@@ -573,7 +572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518922041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -959,7 +958,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 14, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1311,6 +1310,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cropInventory:
+    maxSlots: 0
+    maxStackSize: 0
+    items: []
+  harvestInventory:
     maxSlots: 0
     maxStackSize: 0
     items: []
@@ -57128,14 +57131,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c8af14dae8dbe4e95cda372289f89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlaced: 0
-  placeableObject: {fileID: 0}
-  TESTCROP: {fileID: 0}
+  isPlaced: 1
+  placeableObject: {fileID: 11400000, guid: a29dd64dd331a6342b05e81d10b9b099, type: 2}
+  cropSpriteRenderer: {fileID: 518922042}
+  backgroundSpriteRenderer: {fileID: 531540403}
+  fieldController: {fileID: 122753038}
   crop: {fileID: 0}
-  currentCropSprite: {fileID: 0}
-  daysSincePlanted: 0
-  isWatered: 1
-  state: 0
 --- !u!1 &1507699183
 GameObject:
   m_ObjectHideFlags: 0

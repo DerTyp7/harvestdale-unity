@@ -8,4 +8,5 @@ public class Crop : Item
 {
   public int daysToGrow;
   public List<Sprite> sprites = new List<Sprite>();
+  public Harvest harvest;
 }
