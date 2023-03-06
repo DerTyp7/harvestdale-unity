@@ -1,6 +1,14 @@
 using UnityEngine;
 using System;
 
+public enum Season
+{
+  SPRING = 1,
+  SUMMER = 2,
+  AUTUMN = 3,
+  WINTER = 4
+}
+
 public class TimeManager : MonoBehaviour
 {
   public static Action OnMinuteChanged;
@@ -15,6 +23,8 @@ public class TimeManager : MonoBehaviour
   public static int Day { get; private set; }
   public static int Month { get; private set; }
   public static int Year { get; private set; }
+
+  public static Season CurrentSeason => (Season)Month;
 
   [SerializeField]
   [Range(.05f, 10f)]

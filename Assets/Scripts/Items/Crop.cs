@@ -6,7 +6,35 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "Crop", menuName = "Harvestdale/Items/Crop", order = 0)]
 public class Crop : Item
 {
-  public int daysToGrow;
-  public List<Sprite> sprites = new List<Sprite>();
-  public Harvest harvest;
+  [SerializeField]
+  private List<Sprite> sprites = new List<Sprite>();
+
+  [SerializeField]
+  private Harvest harvestItem;
+
+  [SerializeField]
+  private Season seasonToPlant;
+
+  [SerializeField]
+  private Season seasonToHarvest;
+
+  public List<Sprite> Sprites
+  {
+    get { return sprites; }
+  }
+
+  public Harvest HarvestItem
+  {
+    get { return harvestItem; }
+  }
+
+  public Season SeasonToPlant
+  {
+    get { return seasonToPlant; }
+  }
+
+  public Season SeasonToHarvest
+  {
+    get { return seasonToHarvest; }
+  }
 }

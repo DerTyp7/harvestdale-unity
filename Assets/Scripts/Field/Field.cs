@@ -52,6 +52,7 @@ public class Field : Building
     fieldController.GetComponent<FieldController>().SetField(this);
 
     TimeManager.OnDayChanged += DayInterval;
+    TimeManager.OnMonthChanged += MonthInterval;
   }
 
   public override void OnPlace()
@@ -90,12 +91,18 @@ public class Field : Building
         state = FieldState.DEAD;
       else
       {
-        daysSincePlanted++;
-        if (daysSincePlanted >= crop.daysToGrow)
-        {
-          state = FieldState.HARVESTABLE;
-        }
-        SetSprite(crop.sprites[daysSincePlanted]);
+        // SetSprite(crop.Sprites[daysSincePlanted]);
+      }
+    }
+  }
+
+  private void MonthInterval()
+  {
+    if (state == FieldState.GROWING)
+    {
+      if (crop.SeasonToHarvest == TimeManager.CurrentSeason)
+      {
+        state = FieldState.HARVESTABLE;
       }
     }
   }
@@ -109,7 +116,7 @@ public class Field : Building
       daysSincePlanted = 0;
       state = FieldState.GROWING;
       crop = newCrop;
-      SetSprite(crop.sprites[0]);
+      SetSprite(crop.Sprites[0]);
     }
     else
     {
@@ -122,7 +129,7 @@ public class Field : Building
   {
     if (state == FieldState.HARVESTABLE)
     {
-      FarmManager.Instance.HarvestInventory.Add(crop.harvest, size.x * size.y);
+      FarmManager.Instance.HarvestInventory.Add(crop.HarvestItem, size.x * size.y);
       state = FieldState.EMPTY;
       SetSprite(null);
     }

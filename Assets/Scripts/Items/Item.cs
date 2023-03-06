@@ -3,21 +3,28 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Item", menuName = "Harvestdale/Items/Item", order = 0)]
 public class Item : ScriptableObject
 {
-  public string uuid;
-  public string itemName;
+  [SerializeField]
+  private string uuid;
 
-  public Sprite sprite;
+  [SerializeField]
+  private string itemName;
 
-  [Tooltip("Tools will set this to false on Awake()")]
-  public bool stackable = true;
-  public int maxStackSize = 100;
+  [SerializeField]
+  private Sprite icon;
 
 
-  private void OnEnable()
+  public string UUID
   {
-    if (!stackable)
-    {
-      maxStackSize = 1;
-    }
+    get { return uuid; }
+  }
+
+  public string ItemName
+  {
+    get { return itemName; }
+  }
+
+  public Sprite Icon
+  {
+    get { return icon; }
   }
 }

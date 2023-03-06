@@ -41,29 +41,25 @@ public class Inventory<TItem> where TItem : Item
   {
     int remainingCount = count;
 
-    // check if the item is stackable
-    if (item.stackable)
+    // look for an existing stack of the same item in the inventory
+    for (int i = 0; i < items.Length; i++)
     {
-
-      // look for an existing stack of the same item in the inventory
-      for (int i = 0; i < items.Length; i++)
+      InventoryItem<TItem> invItem = items[i];
+      if (invItem != null && invItem.item == item && invItem.count < maxStackSize)
       {
-        InventoryItem<TItem> invItem = items[i];
-        if (invItem != null && invItem.item == item && invItem.count < maxStackSize)
+        // add as many items as possible to the stack
+        int space = maxStackSize - invItem.count;
+        int toAdd = Mathf.Min(space, remainingCount);
+        invItem.count += toAdd;
+        remainingCount -= toAdd;
+
+        // exit the loop if all items have been added
+        if (remainingCount == 0)
         {
-          // add as many items as possible to the stack
-          int space = maxStackSize - invItem.count;
-          int toAdd = Mathf.Min(space, remainingCount);
-          invItem.count += toAdd;
-          remainingCount -= toAdd;
 
-          // exit the loop if all items have been added
-          if (remainingCount == 0)
-          {
-
-            return 0;
-          }
+          return 0;
         }
+
       }
     }
 
