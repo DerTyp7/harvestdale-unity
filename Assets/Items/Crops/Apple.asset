@@ -14,10 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uuid: apple
   itemName: Apple Crop
-  sprite: {fileID: -992969038, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}
-  stackable: 0
-  maxStackSize: 1
-  daysToGrow: 1
+  icon: {fileID: 21300000, guid: e34975fae663619449e95122ca3d6286, type: 3}
   sprites:
   - {fileID: -1568493089, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}
   - {fileID: 1918686608, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}
@@ -25,4 +22,6 @@ MonoBehaviour:
   - {fileID: -1058307475, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}
   - {fileID: -1664452952, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}
   - {fileID: 1402415594, guid: 81f3e7dd6e7b15747a4a5c1923fb8521, type: 3}
-  harvest: {fileID: 11400000, guid: 601d7a33a6c338d49a35134d5c772940, type: 2}
+  harvestItem: {fileID: 11400000, guid: 601d7a33a6c338d49a35134d5c772940, type: 2}
+  seasonToPlant: 1
+  seasonToHarvest: 2
